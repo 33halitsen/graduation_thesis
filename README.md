@@ -25,7 +25,6 @@
 * [cite_start]**Hybrid Compression Synergy:** When standard CODEC (H.264) is combined with the V6 Sparse Autonomous Masking model and ZLIB, it successfully keeps the structural quality above the 30 dB acceptability threshold (30.32 dB) while operating at ~29.0 FPS on edge devices[cite: 575, 586, 604, 628].
 
 ## 🎬 Real-World Test Videos
-*(Projenin çalışırken kaydedilmiş gerçek hayat test videolarını ve GIF'lerini aşağıdan inceleyebilirsiniz.)*
 
 * ▶️ **[Test Video 1: 360p to 1080p Spatial Upscaling (Apple M1)](
 
