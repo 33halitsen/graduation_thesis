@@ -54,5 +54,4 @@ https://github.com/user-attachments/assets/df526b88-ec10-4cc1-b814-48ade3705daf
 * **Advisor:** Assoc. [cite_start]Prof. Dr. Mehmet Sarıgül[cite: 5].
 * [cite_start]**Date:** 2026[cite: 6].
 
-https://github.com/user-attachments/assets/308163f6-4454-43a9-a533-773acab2762e
 
