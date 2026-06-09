@@ -329,11 +329,11 @@ def hierarchical_inference(model, frames, s, e, coords, device):
 # 4. ANA ÇALIŞTIRICI
 # ==============================================================================
 if __name__ == "__main__":
-    BASE = "/Users/halitsen/Desktop/tez/bitirme tezi"
+    BASE = "/Users/halitsen/Desktop/graduation_thesis"
     device = torch.device("mps" if torch.backends.mps.is_available() else "cpu")
-    model_path = f"{BASE}/deneme12/results/best_micro_vfi_pro_v6.pth"
+    
+    model_path = f"{BASE}/real_world_inference/phase2_temporal_vfi/weights/best_micro_vfi_pro_v6.pth"
 
-    # Model Yükleme
     model = MicroVFINetPro().to(device)
     model.load_state_dict(
         torch.load(model_path, map_location=device, weights_only=True)
@@ -346,15 +346,22 @@ if __name__ == "__main__":
     }
 
     for v_key in ["video1", "video2"]:
-        m_p = f"{BASE}/gerçek hayat/faz2/manifestler/manifest_{v_key}.json"
-        v_p = f"{BASE}/gerçek hayat/videolar/{VIDEO_MAP[v_key]}"
+        v_name = v_key.capitalize() 
+        
+        m_p = f"{BASE}/real_world_inference/phase2_temporal_vfi/manifests/Manifest_{v_name}.json"
+        v_p = f"{BASE}/dataset/videos/{VIDEO_MAP[v_key]}"
+        
         out_csv = (
-            f"{BASE}/gerçek hayat/faz2/test_sonuclari/Akademik_V6_Final_{v_key}.csv"
+            f"{BASE}/real_world_inference/phase2_temporal_vfi/numerical_reports/Akademik_V6_Final_{v_name}.csv"
+        )
+        playback_csv = (
+            f"{BASE}/real_world_inference/phase2_temporal_vfi/numerical_reports/Playback_FPS_{v_name}.csv"
         )
 
-        playback_csv = (
-            f"{BASE}/gerçek hayat/faz2/test_sonuclari/Playback_FPS_{v_key}.csv"
-        )
+        if not os.path.exists(m_p):
+            print(f"⚠️ Manifest not found: {m_p}")
+        if not os.path.exists(v_p):
+            print(f"⚠️ Video not found: {v_p}")
 
         if os.path.exists(m_p) and os.path.exists(v_p):
             player = VideoPlayer(target_fps=25, log_csv_path=playback_csv)
@@ -364,9 +371,7 @@ if __name__ == "__main__":
             )
             worker_thread.start()
 
-            # Oynatıcıyı Ana Thread'de Başlat
             player.start_playback()
 
-            # Thread'in işini tamamen bitirmesini (PSNR hesaplamaları dahil) bekle
             worker_thread.join()
-            print(f"--- {v_key} Testi Bitti ---")
+            print(f"--- {v_name} Testi Bitti ---")
