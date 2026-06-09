@@ -124,8 +124,13 @@ def run_interactive_playback(
     frame_id = 0
 
     print(f"\n[🎬] INITIATING LIVE DECODING: {model_name} | MODE: {mode_name}")
-    cv2.namedWindow("Phase 3: Interactive Split Computing Engine", cv2.WINDOW_NORMAL)
-
+    window_name = "Phase 3: Interactive Split Computing Engine"
+    
+    # Pencereyi oluştur
+    cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+    
+    # Pencereyi tam ekran (fullscreen) moduna geçir
+    cv2.resizeWindow(window_name, 1920, 1080)
     for latent_frame in frame_gen:
         input_tensor = (
             torch.from_numpy(latent_frame).permute(2, 0, 1).unsqueeze(0).float() / 255.0

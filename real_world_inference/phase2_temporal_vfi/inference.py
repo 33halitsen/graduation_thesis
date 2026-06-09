@@ -79,7 +79,9 @@ class VideoPlayer:
         self.log_csv_path = log_csv_path
 
     def start_playback(self):
-        cv2.namedWindow("Faz 2: Constant FPS VFI Player", cv2.WINDOW_NORMAL)
+        window_name = "Faz 2: Constant FPS VFI Player"
+        cv2.namedWindow(window_name, cv2.WINDOW_NORMAL)
+        cv2.resizeWindow(window_name, 1920, 1080)
         print(f"🎬 Oynatıcı Başlatıldı ({self.target_fps} FPS Sabitleyici Aktif)")
 
         log_dir = os.path.dirname(self.log_csv_path)
